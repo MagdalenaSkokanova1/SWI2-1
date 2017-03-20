@@ -3,12 +3,50 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domain;
+package domain;    
+
+import java.util.Arrays;
 
 /**
  *
  * @author pompi20
  */
 public class Project {
+    private int id;
+    private Teacher[] teachers;
+
+    public int getId() {
+        return id;
+    }
+
+    public Teacher[] getTeachers() {
+        return teachers;
+    }
+
+    public void setTeachers(Teacher[] teachers) {
+        this.teachers = teachers;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 23 * hash + Arrays.deepHashCode(this.teachers);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Project other = (Project) obj;
+        if (!Arrays.deepEquals(this.teachers, other.teachers)) {
+            return false;
+        }
+        return true;
+    }
     
 }
