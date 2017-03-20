@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package classModel;
+package utils;
 
 /**
  *
  * @author pompi20
  */
-public class Material {
+public class DaoLayerException {
     
 }
