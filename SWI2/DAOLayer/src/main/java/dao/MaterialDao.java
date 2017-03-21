@@ -13,22 +13,22 @@ import domain.Material;
  */
 public interface MaterialDao {
      /**
-     * Finds and returns Badge by given ID (primary key)
+     * Finds and returns Material by given ID (primary key)
      */
     public Material findById(int id);
 
     /**
-     * Saves Badge entity to database, can either update existing Badge or save new one
+     * Saves Material entity to database, can either update existing Material or save new one
      */
     public void save(Material material);
 
     /**
-     * Deletes given Badge entity from database
+     * Deletes given Material entity from database
      */
     public void delete(Material material);
 
     /**
-     * Returns all Badge entities from database
+     * Returns all Material entities from database
      */
     public List<Material> findAll();
 

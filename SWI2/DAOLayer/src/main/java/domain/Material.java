@@ -13,8 +13,30 @@ import java.util.Objects;
  * @author pompi20
  */
 public class Material {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @NotNull
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name="STUDENT_ID")
+    private Student student;
+
+    @NotNull
+    @ManyToOne(cascade=CascadeType.PERSIST)
+    @JoinColumn(name="TEACHER_ID")
+    private Teacher teacher;
+    
+     public Material(Student student, Teacher teacher) {
+        this.student = student;
+        this.teacher = teacher;
+        
+    }
+
+    
     private String text;
+    
     private Student[] students;
     private Teacher teacher;
 

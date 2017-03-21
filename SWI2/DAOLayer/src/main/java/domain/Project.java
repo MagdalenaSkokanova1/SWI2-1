@@ -6,13 +6,28 @@
 package domain;    
 
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  *
  * @author pompi20
  */
 public class Project {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @NotNull
+    @ManyToMany(cascade=CascadeType.PERSIST)
+    @JoinColumn(name="TEACHER_ID")
+    private Teacher teacher;
+    
+     public Project(Teacher teacher) {
+        this.teacher = teacher;
+            }
+    
+    
     private Teacher[] teachers;
 
     public int getId() {

@@ -6,65 +6,90 @@
 package domain;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  *
  * @author pompi20
  */
 public class Student {
-    private int id;
-    private String jmeno;
-    private String prijmeni;
-    private String adresa;
-    private String kontakt;
-    private String fakulta;
-    private String datumNarozeni;
-    private int rocnik;
-    private String obor;
-    private String stupenStudia;
+  
+    private String name;
+    private String surname;
+    private String address;
+    private String contact;
+    private String faculty;
+    private String dateOfBirth;
+    private int year;
+    private String fieldOfStudy;
+    private String studiumLevel;
     
     private Subject[] subjects;
     private Material[] materials;
     private Test[] tests;
+    
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    
+    @NotNull
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name="SUBJECT_ID")
+    private Subject subject;
+
+   
+    @ManyToOne(cascade=CascadeType.PERSIST)
+    @JoinColumn(name="MATERIAL_ID")
+    private Material material;
+    
+     public Student(Student student, Teacher teacher) {
+        this.subject = subject;
+        this.material = material;
+        
+    }
+    
+    
+    
 
     public int getId() {
         return id;
     }
 
-    public String getJmeno() {
-        return jmeno;
+    public String getName() {
+        return name;
     }
 
-    public String getPrijmeni() {
-        return prijmeni;
+    public String getSurname() {
+        return surname;
     }
 
-    public String getAdresa() {
-        return adresa;
+    public String getAddress() {
+        return address;
     }
 
-    public String getKontakt() {
-        return kontakt;
+    public String getContact() {
+        return contact;
     }
 
-    public String getFakulta() {
-        return fakulta;
+    public String getFaculty() {
+        return faculty;
     }
 
-    public String getDatumNarozeni() {
-        return datumNarozeni;
+    public String getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public int getRocnik() {
-        return rocnik;
+    public int getYear() {
+        return year;
     }
 
-    public String getObor() {
-        return obor;
+    public String getFieldOfStudy() {
+        return fieldOfStudy;
     }
 
-    public String getStupenStudia() {
-        return stupenStudia;
+    public String getStudiumLevel() {
+        return studiumLevel;
     }
 
     public Subject[] getSubjects() {
@@ -79,40 +104,40 @@ public class Student {
         return tests;
     }
 
-    public void setJmeno(String jmeno) {
-        this.jmeno = jmeno;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setPrijmeni(String prijmeni) {
-        this.prijmeni = prijmeni;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
-    public void setAdresa(String adresa) {
-        this.adresa = adresa;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public void setKontakt(String kontakt) {
-        this.kontakt = kontakt;
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
-    public void setFakulta(String fakulta) {
-        this.fakulta = fakulta;
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
     }
 
-    public void setDatumNarozeni(String datumNarozeni) {
-        this.datumNarozeni = datumNarozeni;
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
-    public void setRocnik(int rocnik) {
-        this.rocnik = rocnik;
+    public void setYear(int year) {
+        this.year = year;
     }
 
-    public void setObor(String obor) {
-        this.obor = obor;
+    public void setFieldOfStudy(String fieldOfStudy) {
+        this.fieldOfStudy = fieldOfStudy;
     }
 
-    public void setStupenStudia(String stupenStudia) {
-        this.stupenStudia = stupenStudia;
+    public void setStudiumLevel(String studiumLevel) {
+        this.studiumLevel = studiumLevel;
     }
 
     public void setSubjects(Subject[] subjects) {

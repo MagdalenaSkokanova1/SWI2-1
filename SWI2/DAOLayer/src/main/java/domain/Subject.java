@@ -3,33 +3,58 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package classModel;
+package domain;
 
 import java.util.Arrays;
+
 
 /**
  *
  * @author pompi20
  */
 public class Subject {
-    private int id;
-    private String popis;
-    private int kredity;
+    
+    private String description;
+    private int credits;
     private String semester;
     
     private Student[] students;
     private Teacher[] teachers;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    
+    @NotNull
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name="STUDENT_ID")
+    private Student student;
+
+    
+    @ManyToMany(cascade=CascadeType.PERSIST)
+    @JoinColumn(name="TEACHER_ID")
+    private Teacher teacher;
+    
+     public Subject(Student student, Teacher teacher) {
+        this.student = student;
+        this.teacher = teacher;
+        
+    }
+    
+    
+    
+    
+    
     public int getId() {
         return id;
     }
 
-    public String getPopis() {
-        return popis;
+    public String getDescription() {
+        return description;
     }
 
-    public int getKredity() {
-        return kredity;
+    public int getCredits() {
+        return credits;
     }
 
     public String getSemester() {
@@ -44,12 +69,12 @@ public class Subject {
         return teachers;
     }
 
-    public void setPopis(String popis) {
-        this.popis = popis;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setKredity(int kredity) {
-        this.kredity = kredity;
+    public void setCredits(int credits) {
+        this.credits = credits;
     }
 
     public void setSemester(String semester) {
