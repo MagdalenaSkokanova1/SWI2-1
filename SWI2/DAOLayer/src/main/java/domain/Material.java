@@ -5,6 +5,11 @@
  */
 package domain;
 
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -28,18 +33,21 @@ public class Material {
     @JoinColumn(name="TEACHER_ID")
     private Teacher teacher;
     
-     public Material(Student student, Teacher teacher) {
+    
+    
+    private String text;
+    
+    private Student[] students;
+    
+    private Teacher teacher;
+
+    public Material(Student student, Teacher teacher) {
         this.student = student;
         this.teacher = teacher;
         
     }
 
     
-    private String text;
-    
-    private Student[] students;
-    private Teacher teacher;
-
     public int getId() {
         return id;
     }

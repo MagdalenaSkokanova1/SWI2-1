@@ -5,10 +5,21 @@
  */
 package utils;
 
+import org.springframework.dao.DataAccessException;
 /**
  *
  * @author pompi20
  */
-public class DaoLayerException {
-    
+public class DaoLayerException extends DataAccessException {
+
+    public DaoLayerException(String msg) {
+        super(msg);
+    }
+
+    public DaoLayerException(String msg, Throwable cause) {
+        super(msg, cause);
+    }
+
 }
+    
+
