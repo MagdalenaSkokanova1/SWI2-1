@@ -23,25 +23,23 @@ public class Task {
     private int dificulty;
     private String category;
     
-    private Teacher teacher;
-    private Test[] tests;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
     @NotNull
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ManyToMany(cascade=CascadeType.PERSIST)
     @JoinColumn(name="TEST_ID")
-    private Test test;
+    private Test[] tests;
 
     @NotNull
     @ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name="TEACHER_ID")
     private Teacher teacher;
     
-     public Task(Test test, Teacher teacher) {
-        this.test = test;
+     public Task(Test[] tests, Teacher teacher) {
+        this.tests = tests;
         this.teacher = teacher;
         
     }

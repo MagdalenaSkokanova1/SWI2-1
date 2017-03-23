@@ -11,7 +11,9 @@ import javax.validation.constraints.NotNull;
 
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  *
@@ -24,26 +26,20 @@ public class Material {
     private int id;
     
     @NotNull
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ManyToMany(cascade=CascadeType.PERSIST)
     @JoinColumn(name="STUDENT_ID")
-    private Student student;
-
+    private Set<Student> students = new HashSet<>();
+    
     @NotNull
     @ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name="TEACHER_ID")
     private Teacher teacher;
     
-    
-    
     private String text;
     
-    private Student[] students;
     
-    private Teacher teacher;
-
-    public Material(Student student, Teacher teacher) {
-        this.student = student;
-        this.teacher = teacher;
+    public Material(String text) {
+        this.text = text;
         
     }
 

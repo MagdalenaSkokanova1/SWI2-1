@@ -21,10 +21,6 @@ public class Test {
     private Double ratio;
     private String title;
     
-    private Task[] tasks;
-    private Teacher teacher;
-    private Student student;
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -42,12 +38,12 @@ public class Test {
     @NotNull
     @ManyToMany(cascade=CascadeType.PERSIST)
     @JoinColumn(name="TASK_ID")
-    private Task task;
+    private Task[] tasks;
     
      public Test(Student student, Teacher teacher, Task task) {
         this.student = student;
         this.teacher = teacher;
-        this.task = task;        
+        this.tasks = tasks;        
     }
     
 

@@ -17,7 +17,7 @@ import java.util.Arrays;
  * @author pompi20
  */
 public class Teacher {
-    private int id;
+    
     private String jmeno;
     private String prijmeni;
     private String adresa;
@@ -25,13 +25,6 @@ public class Teacher {
     private String fakulta;
     private String datumNarozeni;
     private String ustav;
-        
-    
-    private Test[] tests;
-    private Task[] tasks;
-    private Project[] projects;
-    private Subject[] subjects;
-    private Material[] materials;
     
     
     @Id
@@ -39,36 +32,36 @@ public class Teacher {
     private int id;
     
     @NotNull
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ManyToMany(cascade=CascadeType.PERSIST)
     @JoinColumn(name="PROJECT_ID")
-    private Projekt project;
+    private Project[] projects;
 
     @NotNull
     @ManyToMany(cascade=CascadeType.PERSIST)
     @JoinColumn(name="SUBJECT_ID")
-    private Subject subject;
+    private Subject[] subjects;
     
     @NotNull
     @OneToMany(cascade=CascadeType.PERSIST)
     @JoinColumn(name="MATERIAL_ID")
-    private Material material;
+    private Material[] materials;
     
     @NotNull
     @OneToMany(cascade=CascadeType.PERSIST)
     @JoinColumn(name="TASK_ID")
-    private Task task;
+    private Task[] tasks;
     
     @NotNull
     @OneToMany(cascade=CascadeType.PERSIST)
     @JoinColumn(name="TEST_ID")
-    private Test test;
+    private Test[] tests;
         
-     public Teacher(Project project, Subject subject, Material material, Task task, Test test) {
-        this.project = project;
-        this.subject = subject;
-        this.material = material;
-        this.task = task;
-        this.test = test;
+     public Teacher(Project[] projects, Subject[] subjects, Material[] materials, Task[] tasks, Test[] tests) {
+        this.projects = projects;
+        this.subjects = subjects;
+        this.materials = materials;
+        this.tasks = tasks;
+        this.tests = tests;
         
     }
 
