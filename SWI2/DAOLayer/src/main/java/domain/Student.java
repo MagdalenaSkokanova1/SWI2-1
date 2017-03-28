@@ -47,7 +47,7 @@ public class Student {
     @JoinColumn(name="MATERIAL_ID")
     private Material material;
     
-     public Student(Student student, Teacher teacher) {
+     public Student(String name, String surname) {
         this.subject = subject;
         this.material = material;
         

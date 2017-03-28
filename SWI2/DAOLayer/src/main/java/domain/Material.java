@@ -11,6 +11,8 @@ import javax.validation.constraints.NotNull;
 
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -35,12 +37,12 @@ public class Material {
     @JoinColumn(name="TEACHER_ID")
     private Teacher teacher;
     
+    
     private String text;
     
     
     public Material(String text) {
         this.text = text;
-        
     }
 
     
@@ -56,18 +58,27 @@ public class Material {
         this.text = text;
     }
 
-    public Student[] getStudents() {
-        return students;
+    public Set<Student> getStudents() {
+        return Collections.unmodifiableSet(students);
     }
 
     public Teacher getTeacher() {
         return teacher;
     }
 
-    public void setStudents(Student[] students) {
-        this.students = students;
+    public void addStudent(Student student) {
+        if (student != null) {
+            this.students.add(student);
+        }
     }
 
+    public void addStudents(Collection<Student> students) {
+        if (students != null) {
+            this.students.addAll(students);
+        }
+    }
+
+    
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
@@ -75,7 +86,7 @@ public class Material {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 59 * hash + Arrays.deepHashCode(this.students);
+        hash = 59 * hash + Objects.hashCode(this.students);
         hash = 59 * hash + Objects.hashCode(this.teacher);
         return hash;
     }
@@ -89,7 +100,7 @@ public class Material {
             return false;
         }
         final Material other = (Material) obj;
-        if (!Arrays.deepEquals(this.students, other.students)) {
+        if (!Objects.equals(this.students, other.students)) {
             return false;
         }
         if (!Objects.equals(this.teacher, other.teacher)) {

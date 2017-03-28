@@ -29,6 +29,9 @@ public class Subject {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
+    
+    
+    
     @NotNull
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinColumn(name="STUDENT_ID")

@@ -10,6 +10,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 
 /**
@@ -18,13 +21,13 @@ import java.util.Arrays;
  */
 public class Teacher {
     
-    private String jmeno;
-    private String prijmeni;
-    private String adresa;
-    private String kontakt;
-    private String fakulta;
-    private String datumNarozeni;
-    private String ustav;
+    private String name;
+    private String surname;
+    private String address;
+    private String contact;
+    private String faculty;
+    private String birthDate;
+    private String department;
     
     
     @Id
@@ -34,145 +37,143 @@ public class Teacher {
     @NotNull
     @ManyToMany(cascade=CascadeType.PERSIST)
     @JoinColumn(name="PROJECT_ID")
-    private Project[] projects;
-
+    private Set<Project> projects = new HashSet<>();
+    
     @NotNull
     @ManyToMany(cascade=CascadeType.PERSIST)
     @JoinColumn(name="SUBJECT_ID")
-    private Subject[] subjects;
+    private Set<Subject> subjects = new HashSet<>();
     
     @NotNull
     @OneToMany(cascade=CascadeType.PERSIST)
     @JoinColumn(name="MATERIAL_ID")
-    private Material[] materials;
-    
+    private Set<Material> materials = new HashSet<>();
+     
     @NotNull
     @OneToMany(cascade=CascadeType.PERSIST)
     @JoinColumn(name="TASK_ID")
-    private Task[] tasks;
+    private Set<Task> tasks = new HashSet<>();
     
     @NotNull
     @OneToMany(cascade=CascadeType.PERSIST)
     @JoinColumn(name="TEST_ID")
-    private Test[] tests;
+    private Set<Test> tests = new HashSet<>();
         
-     public Teacher(Project[] projects, Subject[] subjects, Material[] materials, Task[] tasks, Test[] tests) {
+     public Teacher(String name, String surname) {
+         this.name = name;
+         this.surname = surname;
+                 
+        
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public void setProjects(Set<Project> projects) {
         this.projects = projects;
+    }
+
+    public void setSubjects(Set<Subject> subjects) {
         this.subjects = subjects;
+    }
+
+    public void setMaterials(Set<Material> materials) {
         this.materials = materials;
+    }
+
+    public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    public void setTests(Set<Test> tests) {
         this.tests = tests;
-        
     }
 
     public int getId() {
         return id;
     }
 
-    public String getJmeno() {
-        return jmeno;
+    public String getName() {
+        return name;
     }
 
-    public String getPrijmeni() {
-        return prijmeni;
+    public String getSurname() {
+        return surname;
     }
 
-    public String getAdresa() {
-        return adresa;
+    public String getAddress() {
+        return address;
     }
 
-    public String getKontakt() {
-        return kontakt;
+    public String getContact() {
+        return contact;
     }
 
-    public String getFakulta() {
-        return fakulta;
+    public String getFaculty() {
+        return faculty;
     }
 
-    public String getDatumNarozeni() {
-        return datumNarozeni;
+    public String getBirthDate() {
+        return birthDate;
     }
 
-    public String getUstav() {
-        return ustav;
+    public String getDepartment() {
+        return department;
     }
 
-    public Test[] getTests() {
-        return tests;
-    }
-
-    public Task[] getTasks() {
-        return tasks;
-    }
-
-    public Project[] getProjects() {
+    public Set<Project> getProjects() {
         return projects;
     }
 
-    public Subject[] getSubjects() {
+    public Set<Subject> getSubjects() {
         return subjects;
     }
 
-    public Material[] getMaterials() {
+    public Set<Material> getMaterials() {
         return materials;
     }
 
-    public void setJmeno(String jmeno) {
-        this.jmeno = jmeno;
+    public Set<Task> getTasks() {
+        return tasks;
     }
 
-    public void setPrijmeni(String prijmeni) {
-        this.prijmeni = prijmeni;
-    }
-
-    public void setAdresa(String adresa) {
-        this.adresa = adresa;
-    }
-
-    public void setKontakt(String kontakt) {
-        this.kontakt = kontakt;
-    }
-
-    public void setFakulta(String fakulta) {
-        this.fakulta = fakulta;
-    }
-
-    public void setDatumNarozeni(String datumNarozeni) {
-        this.datumNarozeni = datumNarozeni;
-    }
-
-    public void setUstav(String ustav) {
-        this.ustav = ustav;
-    }
-
-    public void setTests(Test[] tests) {
-        this.tests = tests;
-    }
-
-    public void setTasks(Task[] tasks) {
-        this.tasks = tasks;
-    }
-
-    public void setProjects(Project[] projects) {
-        this.projects = projects;
-    }
-
-    public void setSubjects(Subject[] subjects) {
-        this.subjects = subjects;
-    }
-
-    public void setMaterials(Material[] materials) {
-        this.materials = materials;
+    public Set<Test> getTests() {
+        return tests;
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 97 * hash + Arrays.deepHashCode(this.tests);
-        hash = 97 * hash + Arrays.deepHashCode(this.tasks);
-        hash = 97 * hash + Arrays.deepHashCode(this.projects);
-        hash = 97 * hash + Arrays.deepHashCode(this.subjects);
-        hash = 97 * hash + Arrays.deepHashCode(this.materials);
+        hash = 17 * hash + Objects.hashCode(this.projects);
+        hash = 17 * hash + Objects.hashCode(this.subjects);
+        hash = 17 * hash + Objects.hashCode(this.materials);
+        hash = 17 * hash + Objects.hashCode(this.tasks);
+        hash = 17 * hash + Objects.hashCode(this.tests);
         return hash;
     }
 
@@ -188,24 +189,26 @@ public class Teacher {
             return false;
         }
         final Teacher other = (Teacher) obj;
-        if (!Arrays.deepEquals(this.tests, other.tests)) {
+        if (!Objects.equals(this.projects, other.projects)) {
             return false;
         }
-        if (!Arrays.deepEquals(this.tasks, other.tasks)) {
+        if (!Objects.equals(this.subjects, other.subjects)) {
             return false;
         }
-        if (!Arrays.deepEquals(this.projects, other.projects)) {
+        if (!Objects.equals(this.materials, other.materials)) {
             return false;
         }
-        if (!Arrays.deepEquals(this.subjects, other.subjects)) {
+        if (!Objects.equals(this.tasks, other.tasks)) {
             return false;
         }
-        if (!Arrays.deepEquals(this.materials, other.materials)) {
+        if (!Objects.equals(this.tests, other.tests)) {
             return false;
         }
         return true;
     }
 
+    
+    
    
     
 }

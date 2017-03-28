@@ -1,14 +1,9 @@
 package dao;
 
-/*
-import cz.fi.muni.pa165.seminar.pkmnleague.domain.Gym;
-import cz.fi.muni.pa165.seminar.pkmnleague.domain.PokemonType;
-import cz.fi.muni.pa165.seminar.pkmnleague.domain.Trainer;
-import cz.fi.muni.pa165.seminar.pkmnleague.domain.Badge;
-*/
+import domain.Material;
+import domain.Student;
 import domain.Teacher;
 import utils.EmbeddedDerbyDatabase;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -18,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.testng.annotations.Test;
 
 import java.sql.Date;
+import org.hibernate.mapping.Set;
 
 import static org.junit.Assert.*;
 
@@ -34,54 +30,42 @@ public class MaterialDaoTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testSave() {
-        teacher teacher = new Teacher()
-        ("Misty", "misty@kanto.jp", "", new Date(1996, 1, 2));
-        Gym gym = new Gym("Cerulean", PokemonType.WATER, leader);
-        Gym gym2 = new Gym("Pewter", PokemonType.WATER, leader);
+        Teacher techer = new Teacher("Petr", "Novák");
+        Student student1 = new Student("Stud1", "Dent1");
+        Student student2 = new Student("Stud2", "Dent2");
+        
+        Material material = new Material("toto je novy material");
 
-        Trainer t = new Trainer("Ash", "satoshi@kanto.jp", "", new Date(0));
+        materialDao.save(material);
 
-        Badge badge = new Badge(t, gym);
+        Material resultCreate = materialDao.findById(material.getId());
+        assertEquals(material, resultCreate);
 
-        badgeDao.save(badge);
-
-        Badge resultCreate = badgeDao.findById(badge.getId());
-        assertEquals(badge, resultCreate);
-
-        badge.setGym(gym2);
-
-        badgeDao.save(badge);
-        Badge resultUpdate = badgeDao.findById(badge.getId());
-        assertEquals(badge, resultUpdate);
+        material.addStudent(student1);
+        material.addStudent(student2);
+        materialDao.save(material);
+        
+        Material resultUpdate = materialDao.findById(material.getId());
+        assertEquals(2, resultUpdate.getStudents().size());
     }
 
     @Test
     public void testDelete() {
-        Trainer leader = new Trainer("Misty", "misty@kanto.jp", "", new Date(1996, 1, 2));
-        Gym gym = new Gym("Cerulean", PokemonType.WATER, leader);
+        Material material = new Material("toto je testovaci material");
 
-        Trainer t = new Trainer("Ash", "satoshi@kanto.jp", "", new Date(0));
+        materialDao.save(material);
+        materialDao.delete(material);
 
-        Badge badge = new Badge(t, gym);
-
-        badgeDao.save(badge);
-        badgeDao.delete(badge);
-
-        assertEquals(0, badgeDao.findAll().size());
+        assertEquals(0, materialDao.findAll().size());
     }
 
     @Test
     public void testFindAll() {
-        Trainer leader = new Trainer("Misty", "misty@kanto.jp", "", new Date(1996, 1, 2));
-        Gym gym = new Gym("Cerulean", PokemonType.WATER, leader);
+        Material material = new Material("toto je testovaci material");
 
-        Trainer t = new Trainer("Ash", "satoshi@kanto.jp", "", new Date(0));
+        materialDao.save(material);
 
-        Badge badge = new Badge(t, gym);
-
-        badgeDao.save(badge);
-
-        assertEquals(1, badgeDao.findAll().size());
+        assertEquals(1, materialDao.findAll().size());
     }
 
 }

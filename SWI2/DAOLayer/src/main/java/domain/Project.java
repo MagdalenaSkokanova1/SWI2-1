@@ -25,15 +25,12 @@ public class Project {
     @NotNull
     @ManyToMany(cascade=CascadeType.PERSIST)
     @JoinColumn(name="TEACHER_ID")
-    private Teacher teacher;
-    
-     public Project(Teacher teacher) {
-        this.teacher = teacher;
-            }
-    
-    
     private Teacher[] teachers;
-
+    
+    public Project() {
+        
+    }
+  
     public int getId() {
         return id;
     }
