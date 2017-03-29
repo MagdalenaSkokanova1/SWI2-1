@@ -22,8 +22,5 @@ public class ELearningRunner {
         for(URL url: urls){
         	System.out.println(url.getFile());
         }
-    
-    }   
     }
- 
 }

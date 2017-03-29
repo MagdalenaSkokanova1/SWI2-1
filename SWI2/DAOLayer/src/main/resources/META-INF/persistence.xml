@@ -10,11 +10,19 @@
     <persistence-unit name="ELearningPersistence" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>
-            <property name="hibernate.connection.url" value="jdbc:derby:ELearningDB;create=true" />
-            <property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.EmbeddedDriver" />
+            
+            <property name="hibernate.connection.url" value="jdbc:postgres://sfffbryo:r41YordCJcgVr60TsiAZzFUzl3fhr4_c@stampy.db.elephantsql.com:5432/sfffbryo" />
+            
+            <property name="hibernate.connection.username" value="sfffbryo" />
+            <property name="hibernate.connection.password" value="r41YordCJcgVr60TsiAZzFUzl3fhr4_c" />
+            
+            
+            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
             <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider" />
             <property name="hibernate.archive.autodetection" value="class, hbm" />
-            <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+            
+            
             <property name="hibernate.generateDdl" value="true" />
             <property name="hibernate.hbm2ddl.auto" value="create" />
             <property name="hibernate.show_sql" value="true" />
