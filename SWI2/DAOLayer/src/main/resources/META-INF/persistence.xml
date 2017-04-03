@@ -11,7 +11,7 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>
             
-            <property name="hibernate.connection.url" value="jdbc:postgres://sfffbryo:r41YordCJcgVr60TsiAZzFUzl3fhr4_c@stampy.db.elephantsql.com:5432/sfffbryo" />
+            <property name="hibernate.connection.url" value="jdbc:postgresql://echo-01.db.elephantsql.com:5432/sfffbryo" />
             
             <property name="hibernate.connection.username" value="sfffbryo" />
             <property name="hibernate.connection.password" value="r41YordCJcgVr60TsiAZzFUzl3fhr4_c" />
