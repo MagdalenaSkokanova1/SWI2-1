@@ -9,6 +9,9 @@ package service.config;
  *
  * @author pompi20
  */
-public class Pridej3 {
+public class ElearningRunner {
+   public static void main(String[] args) {
     
+    
+    }   
 }

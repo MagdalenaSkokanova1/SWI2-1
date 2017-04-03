@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package exception;
+package facade;
 
 /**
  *
  * @author pompi20
  */
-public class TadyPridej2 {
+public class MaterialFacadeImpl {
     
 }
