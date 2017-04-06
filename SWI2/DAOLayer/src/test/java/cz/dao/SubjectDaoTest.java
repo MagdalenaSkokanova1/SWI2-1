@@ -1,9 +1,9 @@
-package dao;
+package cz.dao;
 
-import domain.Student;
-import domain.Teacher;
-import domain.Subject;
-import utils.EmbeddedDerbyDatabase;
+import cz.domain.Student;
+import cz.domain.Teacher;
+import cz.domain.Subject;
+import cz.utils.EmbeddedDerbyDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -30,7 +30,7 @@ public class SubjectDaoTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testSave() {
-        Teacher techer = new Teacher("Petr", "Novák");
+        Teacher teacher = new Teacher("Petr", "Novák");
         Student student1 = new Student("Stud1", "Dent1");
         Student student2 = new Student("Stud2", "Dent2");
         

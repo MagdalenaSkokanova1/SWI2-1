@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domain;
+package cz.domain;
 
 
 import javax.persistence.*;
@@ -63,8 +63,8 @@ public class Material {
         return Collections.unmodifiableSet(students);
     }
 
-    public Teacher getTeacher() {
-        return teacher;
+    public Set<Teacher> getTeacher() {
+        return teachers;
     }
 
     public void addStudent(Student student) {
@@ -78,17 +78,25 @@ public class Material {
             this.students.addAll(students);
         }
     }
-
-    
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
+    public void addTeacher(Teacher teacher) {
+        if (teacher != null) {
+            this.teachers.add(teacher);
+        }
     }
 
+    public void addTeachers(Collection<Teacher> teachers) {
+        if (teachers != null) {
+            this.teachers.addAll(teachers);
+        }
+    }
+
+    
+    
     @Override
     public int hashCode() {
         int hash = 5;
         hash = 59 * hash + Objects.hashCode(this.students);
-        hash = 59 * hash + Objects.hashCode(this.teacher);
+        hash = 59 * hash + Objects.hashCode(this.teachers);
         return hash;
     }
 
@@ -104,7 +112,7 @@ public class Material {
         if (!Objects.equals(this.students, other.students)) {
             return false;
         }
-        if (!Objects.equals(this.teacher, other.teacher)) {
+        if (!Objects.equals(this.teachers, other.teachers)) {
             return false;
         }
         return true;

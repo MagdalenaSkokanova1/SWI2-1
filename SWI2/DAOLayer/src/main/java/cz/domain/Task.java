@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domain;
+package cz.domain;
 
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -65,14 +66,13 @@ public class Task {
         return category;
     }
 
-    public Teacher getTeacher() {
-        return teacher;
+    public Set<Teacher> getTeacher() {
+        return teachers;
     }
-
-    public Test[] getTests() {
+    public Set<Test> getTest() {
         return tests;
     }
-
+    
     public void setQuestion(String question) {
         this.question = question;
     }
@@ -93,19 +93,35 @@ public class Task {
         this.category = category;
     }
 
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
+    public void addTeacher(Teacher teacher) {
+        if (teacher != null) {
+            this.teachers.add(teacher);
+        }
     }
 
-    public void setTests(Test[] tests) {
-        this.tests = tests;
+    public void addTeachers(Collection<Teacher> teachers) {
+        if (teachers != null) {
+            this.teachers.addAll(teachers);
+        }
+    }
+
+    public void addTest(Test test) {
+        if (test != null) {
+            this.tests.add(test);
+        }
+    }
+
+    public void addTests(Collection<Test> tests) {
+        if (tests != null) {
+            this.tests.addAll(tests);
+        }
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 53 * hash + Objects.hashCode(this.teacher);
-        hash = 53 * hash + Arrays.deepHashCode(this.tests);
+        int hash = 3;
+        hash = 61 * hash + Objects.hashCode(this.tests);
+        hash = 61 * hash + Objects.hashCode(this.teachers);
         return hash;
     }
 
@@ -121,14 +137,15 @@ public class Task {
             return false;
         }
         final Task other = (Task) obj;
-        if (!Objects.equals(this.teacher, other.teacher)) {
+        if (!Objects.equals(this.tests, other.tests)) {
             return false;
         }
-        if (!Arrays.deepEquals(this.tests, other.tests)) {
+        if (!Objects.equals(this.teachers, other.teachers)) {
             return false;
         }
         return true;
     }
+
     
     
     

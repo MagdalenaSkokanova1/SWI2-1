@@ -1,10 +1,12 @@
-package dao;
+/*
 
-import domain.Test;
-import domain.Student;
-import domain.Teacher;
-import domain.Task;
-import utils.EmbeddedDerbyDatabase;
+package cz.dao;
+
+import cz.domain.Test;
+import cz.domain.Student;
+import cz.domain.Teacher;
+import cz.domain.Task;
+import cz.utils.EmbeddedDerbyDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -18,9 +20,6 @@ import org.hibernate.mapping.Set;
 
 import static org.junit.Assert.*;
 
-/**
- * @author Pavel Kouřil
- */
 @ContextConfiguration(classes = EmbeddedDerbyDatabase.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
@@ -31,10 +30,11 @@ public class TestDaoTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testSave() {
-        Teacher techer = new Teacher("Petr", "Novák");
+        Teacher teacher = new Teacher("Petr", "Novák");
         Student student1 = new Student("Stud1", "Dent1");
         Student student2 = new Student("Stud2", "Dent2");
         Task task = new Task("toto je novy task","kategoria");
+        
         Test test = new Test("toto je novy task", 0.5);
 
         testDao.save(test);
@@ -44,8 +44,8 @@ public class TestDaoTest extends AbstractTestNGSpringContextTests {
 
         test.addStudent(student1);
         test.addStudent(student2);
-        test.addtask(task);
-        test.addteacher(teacher);
+        test.addTask(task);
+        test.addTeacher(teacher);
         testDao.save(test);
         
         Test resultUpdate = testDao.findById(test.getId());
@@ -72,3 +72,4 @@ public class TestDaoTest extends AbstractTestNGSpringContextTests {
     }
 
 }
+*/

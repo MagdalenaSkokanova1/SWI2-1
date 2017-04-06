@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domain;
+package cz.domain;
 
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -98,22 +99,79 @@ public class Teacher {
         this.projects = projects;
     }
 
+    public void addProject(Project project) {
+        if (project != null) {
+            this.projects.add(project);
+        }
+    }
+
+    public void addProjects(Collection<Project> projects) {
+        if (projects != null) {
+            this.projects.addAll(projects);
+        }
+    }
+    
     public void setSubjects(Set<Subject> subjects) {
         this.subjects = subjects;
     }
 
+    public void addSubject(Subject subject) {
+        if (subject != null) {
+            this.subjects.add(subject);
+        }
+    }
+
+    public void addSubjects(Collection<Subject> subjects) {
+        if (subjects != null) {
+            this.subjects.addAll(subjects);
+        }
+    }
+    
     public void setMaterials(Set<Material> materials) {
         this.materials = materials;
     }
+public void addMaterial(Material material) {
+        if (material != null) {
+            this.materials.add(material);
+        }
+    }
 
+    public void addMaterials(Collection<Material> materialmaterials) {
+        if (materials != null) {
+            this.materials.addAll(materials);
+        }
+    }
+    
     public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
     }
+public void addTask(Task task) {
+        if (task != null) {
+            this.tasks.add(task);
+        }
+    }
 
+    public void addTasks(Collection<Task> tasks) {
+        if (tasks != null) {
+            this.tasks.addAll(tasks);
+        }
+    }
+    
     public void setTests(Set<Test> tests) {
         this.tests = tests;
     }
+public void addTest(Test test) {
+        if (test != null) {
+            this.tests.add(test);
+        }
+    }
 
+    public void addTests(Collection<Test> tests) {
+        if (tests != null) {
+            this.tests.addAll(tests);
+        }
+    }
+    
     public int getId() {
         return id;
     }

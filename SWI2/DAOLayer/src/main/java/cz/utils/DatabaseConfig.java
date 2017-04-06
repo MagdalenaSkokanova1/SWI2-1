@@ -80,12 +80,11 @@ public class DatabaseConfig {
      
         
         
-        
           DriverManagerDataSource builder = new DriverManagerDataSource();
      builder.setDriverClassName( "org.postgresql.Driver" );
-      builder.setUrl( "postgres://sfffbryo:r41YordCJcgVr60TsiAZzFUzl3fhr4_c@stampy.db.elephantsql.com:5432/sfffbryo" );
-     builder.setUsername( "sfffbryo" );
-      builder.setPassword( "r41YordCJcgVr60TsiAZzFUzl3fhr4_c" );
+      builder.setUrl( "jdbc:postgresql://echo-01.db.elephantsql.com:5432/wfekayeq" );
+     builder.setUsername( "restUser" );
+      builder.setPassword( "restmy5ql" );
       
       
         return builder;

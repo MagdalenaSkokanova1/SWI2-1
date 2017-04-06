@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domain;    
+package cz.domain;    
 
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -38,23 +39,34 @@ public class Project {
         return id;
     }
 
-    public Teacher[] getTeachers() {
+     public Set<Teacher> getTeacher() {
         return teachers;
     }
 
-    public void setTeachers(Teacher[] teachers) {
-        this.teachers = teachers;
+    public void addTeacher(Teacher teacher) {
+        if (teacher != null) {
+            this.teachers.add(teacher);
+        }
+    }
+
+    public void addTeachers(Collection<Teacher> teachers) {
+        if (teachers != null) {
+            this.teachers.addAll(teachers);
+        }
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 23 * hash + Arrays.deepHashCode(this.teachers);
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.teachers);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (obj == null) {
             return false;
         }
@@ -62,10 +74,9 @@ public class Project {
             return false;
         }
         final Project other = (Project) obj;
-        if (!Arrays.deepEquals(this.teachers, other.teachers)) {
+        if (!Objects.equals(this.teachers, other.teachers)) {
             return false;
         }
         return true;
-    }
-    
+    } 
 }

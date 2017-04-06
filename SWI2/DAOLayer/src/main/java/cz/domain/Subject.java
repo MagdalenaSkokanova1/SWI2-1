@@ -3,14 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domain;
+package cz.domain;
 
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 
@@ -67,12 +70,35 @@ public class Subject {
         return semester;
     }
 
-    public Student[] getStudents() {
-        return students;
+     public Set<Student> getStudents() {
+        return Collections.unmodifiableSet(students);
     }
 
-    public Teacher[] getTeachers() {
+    public Set<Teacher> getTeacher() {
         return teachers;
+    }
+
+    public void addStudent(Student student) {
+        if (student != null) {
+            this.students.add(student);
+        }
+    }
+
+    public void addStudents(Collection<Student> students) {
+        if (students != null) {
+            this.students.addAll(students);
+        }
+    }
+    public void addTeacher(Teacher teacher) {
+        if (teacher != null) {
+            this.teachers.add(teacher);
+        }
+    }
+
+    public void addTeachers(Collection<Teacher> teachers) {
+        if (teachers != null) {
+            this.teachers.addAll(teachers);
+        }
     }
 
     public void setDescription(String description) {
@@ -87,24 +113,19 @@ public class Subject {
         this.semester = semester;
     }
 
-    public void setStudents(Student[] students) {
-        this.students = students;
-    }
-
-    public void setTeachers(Teacher[] teachers) {
-        this.teachers = teachers;
-    }
-
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 13 * hash + Arrays.deepHashCode(this.students);
-        hash = 13 * hash + Arrays.deepHashCode(this.teachers);
+        int hash = 5;
+        hash = 17 * hash + Objects.hashCode(this.students);
+        hash = 17 * hash + Objects.hashCode(this.teachers);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (obj == null) {
             return false;
         }
@@ -112,16 +133,15 @@ public class Subject {
             return false;
         }
         final Subject other = (Subject) obj;
-        if (!Arrays.deepEquals(this.students, other.students)) {
+        if (!Objects.equals(this.students, other.students)) {
             return false;
         }
-        if (!Arrays.deepEquals(this.teachers, other.teachers)) {
+        if (!Objects.equals(this.teachers, other.teachers)) {
             return false;
         }
         return true;
     }
+
     
-    
-   
     
 }

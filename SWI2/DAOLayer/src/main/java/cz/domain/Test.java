@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domain;
+package cz.domain;
 
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.HashSet;
 import java.util.Set;
@@ -60,18 +62,55 @@ public class Test {
         return title;
     }
 
-    public Task[] getTasks() {
+    public Set<Task> getTask() {
         return tasks;
     }
 
-    public Teacher getTeacher() {
-        return teacher;
+    public void addTask(Task task) {
+        if (task != null) {
+            this.tasks.add(task);
+        }
     }
 
-    public Student getStudent() {
-        return student;
+    public void addTasks(Collection<Task> tasks) {
+        if (tasks != null) {
+            this.tasks.addAll(tasks);
+        }
+    }
+    
+
+    public Set<Student> getStudents() {
+        return Collections.unmodifiableSet(students);
     }
 
+    public Set<Teacher> getTeacher() {
+        return teachers;
+    }
+
+    public void addStudent(Student student) {
+        if (student != null) {
+            this.students.add(student);
+        }
+    }
+
+    public void addStudents(Collection<Student> students) {
+        if (students != null) {
+            this.students.addAll(students);
+        }
+    }
+    public void addTeacher(Teacher teacher) {
+        if (teacher != null) {
+            this.teachers.add(teacher);
+        }
+    }
+
+    public void addTeachers(Collection<Teacher> teachers) {
+        if (teachers != null) {
+            this.teachers.addAll(teachers);
+        }
+    }
+
+    
     public void setRatio(Double ratio) {
         this.ratio = ratio;
     }
@@ -80,24 +119,12 @@ public class Test {
         this.title = title;
     }
 
-    public void setTasks(Task[] tasks) {
-        this.tasks = tasks;
-    }
-
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 89 * hash + Arrays.deepHashCode(this.tasks);
-        hash = 89 * hash + Objects.hashCode(this.teacher);
-        hash = 89 * hash + Objects.hashCode(this.student);
+        hash = 53 * hash + Objects.hashCode(this.students);
+        hash = 53 * hash + Objects.hashCode(this.teachers);
+        hash = 53 * hash + Objects.hashCode(this.tasks);
         return hash;
     }
 
@@ -113,18 +140,18 @@ public class Test {
             return false;
         }
         final Test other = (Test) obj;
-        if (!Arrays.deepEquals(this.tasks, other.tasks)) {
+        if (!Objects.equals(this.students, other.students)) {
             return false;
         }
-        if (!Objects.equals(this.teacher, other.teacher)) {
+        if (!Objects.equals(this.teachers, other.teachers)) {
             return false;
         }
-        if (!Objects.equals(this.student, other.student)) {
+        if (!Objects.equals(this.tasks, other.tasks)) {
             return false;
         }
         return true;
     }
+
     
-  
     
 }

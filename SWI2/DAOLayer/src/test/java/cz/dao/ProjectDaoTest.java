@@ -1,8 +1,8 @@
-package dao;
+package cz.dao;
 
-import domain.Project;
-import domain.Teacher;
-import utils.EmbeddedDerbyDatabase;
+import cz.domain.Project;
+import cz.domain.Teacher;
+import cz.utils.EmbeddedDerbyDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -29,7 +29,7 @@ public class ProjectDaoTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testSave() {
-        Teacher techer = new Teacher("Petr", "Novák");
+        Teacher teacher = new Teacher("Petr", "Novák");
             
         Project project = new Project("toto je novy project");
 
@@ -39,10 +39,11 @@ public class ProjectDaoTest extends AbstractTestNGSpringContextTests {
         assertEquals(project, resultCreate);
 
         project.addTeacher(teacher);
+        
         projectDao.save(project);
         
         Project resultUpdate = projectDao.findById(project.getId());
-        assertEquals(2, resultUpdate.getStudents().size());
+        assertEquals(project, resultUpdate);
     }
 
     @Test
