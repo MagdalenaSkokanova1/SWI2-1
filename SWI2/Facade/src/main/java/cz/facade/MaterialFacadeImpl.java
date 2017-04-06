@@ -1,39 +1,39 @@
 /*
-
-PRO MEGIIIIII
-
-
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.facade;
+package facade;
 
-import cz.domain.Material;
-//import cz.services.MaterialService;
-import cz.services.BeanMappingService;
+import domain.Material;
+import dto.MaterialCreateDTO;
+import dto.MaterialDTO;
+import services.BeanMappingService;
+import services.MaterialService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  *
- * @author pompi20
+ * @author olda
  */
-public class MaterialFacadeImpl  implements MaterialFacade{
-   
+public class MaterialFacadeImpl implements MaterialFacade{
+
     @Autowired
     private BeanMappingService beanMappingService;
     
     @Autowired
-    private MaterialseService materialService;
+    private MaterialService materialService;
     
-     
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    
     @Override
-    public int createMaterial(MaterialCreateDTO m) {
+    public int createMaterial(MaterialCreateDTO t) {
 
-        Material newMaterial = new Material(m.getTextMateril());
-        
+        String encodedPassword = passwordEncoder.encode(t.getPassword());
+        Material newMaterial = new Material(t.getNameMaterial(), t.getTeacher(), t.getText(), encodedPassword);
         materialService.create(newMaterial);
         return newMaterial.getId();
     
@@ -41,7 +41,7 @@ public class MaterialFacadeImpl  implements MaterialFacade{
 
     @Override
     public void deleteMaterial(int materialId) {
-            materialService.delete(materialService.findById(materialId));    }
+        materialService.delete(materialService.findById(materialId));    }
 
     @Override
     public List<MaterialDTO> getAllMaterials() {
@@ -57,8 +57,6 @@ public class MaterialFacadeImpl  implements MaterialFacade{
     
     }
 
-    
-    
     
     
 }

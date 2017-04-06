@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.services;
+package services;
 
 import java.util.Collection;
 import java.util.List;
 import org.dozer.Mapper;
-
 
 /**
  *
