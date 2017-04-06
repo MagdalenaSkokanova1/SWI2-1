@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.domain;
+package domain;
 
 
 import javax.persistence.*;
@@ -26,8 +26,9 @@ public class Material {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String text;
     
-    @NotNull
+    
     @ManyToMany(cascade=CascadeType.PERSIST)
     @JoinColumn(name="STUDENT_ID")
     private Set<Student> students = new HashSet<>();
@@ -35,10 +36,10 @@ public class Material {
     @NotNull
     @ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name="TEACHER_ID")
-    private Teacher teacher;
+    private Set<Teacher> teachers = new HashSet<>();
     
     
-    private String text;
+    
     
     
     public Material(String text) {

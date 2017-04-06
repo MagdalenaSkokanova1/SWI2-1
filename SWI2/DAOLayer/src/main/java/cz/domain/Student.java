@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.domain;
+package domain;
 
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  *
@@ -28,11 +30,7 @@ public class Student {
     private String fieldOfStudy;
     private String studiumLevel;
     
-    private Subject[] subjects;
-    private Material[] materials;
-    private Test[] tests;
-    
-    
+   
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -40,16 +38,22 @@ public class Student {
     @NotNull
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinColumn(name="SUBJECT_ID")
-    private Subject subject;
+    private Set<Subject> subjects = new HashSet<>();
 
-   
+    
     @ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name="MATERIAL_ID")
-    private Material material;
+    private Set<Material> materials = new HashSet<>();
+    
+    
+    @OneToMany(cascade=CascadeType.PERSIST)
+    @JoinColumn(name="TEST_ID")
+    private Set<Test> tests = new HashSet<>();
+
     
      public Student(String name, String surname) {
-        this.subject = subject;
-        this.material = material;
+        this.name = name;
+        this.surname = surname;
         
     }
     

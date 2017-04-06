@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.domain;    
+package domain;    
 
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  *
@@ -21,14 +23,15 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String text;
 
     @NotNull
     @ManyToMany(cascade=CascadeType.PERSIST)
     @JoinColumn(name="TEACHER_ID")
-    private Teacher[] teachers;
+    private Set<Teacher> teachers = new HashSet<>();
     
-    public Project() {
-        
+    public Project(String text) {
+    this.text = text;    
     }
   
     public int getId() {

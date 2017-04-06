@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.domain;
+package domain;
 
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  *
@@ -31,18 +33,17 @@ public class Task {
     @NotNull
     @ManyToMany(cascade=CascadeType.PERSIST)
     @JoinColumn(name="TEST_ID")
-    private Test[] tests;
+    private Set<Test> tests = new HashSet<>();
 
     @NotNull
     @ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name="TEACHER_ID")
-    private Teacher teacher;
+    private Set<Teacher> teachers = new HashSet<>();
     
-     public Task(Test[] tests, Teacher teacher) {
-        this.tests = tests;
-        this.teacher = teacher;
-        
-    }
+     public Task(String question, String category) {
+        this.question = question;
+        this.category = category;
+      }
     
    public int getId() {
         return id;
