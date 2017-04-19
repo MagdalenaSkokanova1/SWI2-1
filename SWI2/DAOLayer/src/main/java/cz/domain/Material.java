@@ -21,6 +21,7 @@ import java.util.Set;
  *
  * @author pompi20
  */
+@Entity
 public class Material {
     
     @Id
@@ -29,15 +30,14 @@ public class Material {
     private String text;
     
     
-    @ManyToMany(cascade=CascadeType.PERSIST)
-    @JoinColumn(name="STUDENT_ID")
-    private Set<Student> students = new HashSet<>();
-    
+    @ManyToOne(cascade=CascadeType.PERSIST)
+    private Student student;
+    /*
     @NotNull
     @ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name="TEACHER_ID")
     private Set<Teacher> teachers = new HashSet<>();
-    
+    */
     
     
     
@@ -46,9 +46,17 @@ public class Material {
         this.text = text;
     }
 
-    
+    protected Material(){}
     public int getId() {
         return id;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     public String getText() {
@@ -59,7 +67,7 @@ public class Material {
         this.text = text;
     }
 
-    public Set<Student> getStudents() {
+    /*public Set<Student> getStudents() {
         return Collections.unmodifiableSet(students);
     }
 
@@ -88,15 +96,15 @@ public class Material {
         if (teachers != null) {
             this.teachers.addAll(teachers);
         }
-    }
+    }*/
 
     
     
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 59 * hash + Objects.hashCode(this.students);
-        hash = 59 * hash + Objects.hashCode(this.teachers);
+        //hash = 59 * hash + Objects.hashCode(this.students);
+        //hash = 59 * hash + Objects.hashCode(this.teachers);
         return hash;
     }
 
@@ -109,12 +117,12 @@ public class Material {
             return false;
         }
         final Material other = (Material) obj;
-        if (!Objects.equals(this.students, other.students)) {
+       /* if (!Objects.equals(this.students, other.students)) {
             return false;
         }
         if (!Objects.equals(this.teachers, other.teachers)) {
             return false;
-        }
+        }*/
         return true;
     }
     

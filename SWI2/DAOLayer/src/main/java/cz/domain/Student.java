@@ -19,6 +19,7 @@ import java.util.Set;
  *
  * @author pompi20
  */
+@Entity
 public class Student {
   
     private String name;
@@ -36,20 +37,8 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    @NotNull
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name="SUBJECT_ID")
-    private Set<Subject> subjects = new HashSet<>();
-
-    
-    @ManyToOne(cascade=CascadeType.PERSIST)
-    @JoinColumn(name="MATERIAL_ID")
+    @OneToMany(mappedBy = "student")
     private Set<Material> materials = new HashSet<>();
-    
-    
-    @OneToMany(cascade=CascadeType.PERSIST)
-    @JoinColumn(name="TEST_ID")
-    private Set<Test> tests = new HashSet<>();
 
     
      public Student(String name, String surname) {
@@ -57,6 +46,26 @@ public class Student {
         this.surname = surname;
         
     }
+     
+     public Set<Material> getMaterial() {
+        return materials;
+    }
+
+    public void addMaterial(Material material) {
+        if (material != null) {
+            this.materials.add(material);
+        }
+    }
+
+    public void addMaterial(Collection<Material> materials) {
+        if (materials != null) {
+            this.materials.addAll(materials);
+        }
+    }
+     
+    protected Student(){
+    
+    } 
     
     
     
@@ -102,54 +111,7 @@ public class Student {
     }
 
     
-     public Set<Subject> getSubject() {
-        return subjects;
-    }
-
-    public void addSubject(Subject subject) {
-        if (subject != null) {
-            this.subjects.add(subject);
-        }
-    }
-
-    public void addSubject(Collection<Subject> subject) {
-        if (subject != null) {
-            this.subjects.addAll(subject);
-        }
-    }
-
-    
-    public Set<Material> getMaterial() {
-        return materials;
-    }
-
-    public void addMaterial(Material material) {
-        if (material != null) {
-            this.materials.add(material);
-        }
-    }
-
-    public void addMaterial(Collection<Material> materials) {
-        if (materials != null) {
-            this.materials.addAll(materials);
-        }
-    }
-      
-    public Set<Test> getTest() {
-        return tests;
-    }
-
-    public void addTest(Test test) {
-        if (test != null) {
-            this.tests.add(test);
-        }
-    }
-
-    public void addTest(Collection<Test> tests) {
-        if (tests != null) {
-            this.tests.addAll(tests);
-        }
-    }
+     
 
     
     public void setName(String name) {
@@ -191,9 +153,7 @@ public class Student {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.subjects);
-        hash = 59 * hash + Objects.hashCode(this.materials);
-        hash = 59 * hash + Objects.hashCode(this.tests);
+        
         return hash;
     }
 
@@ -209,15 +169,7 @@ public class Student {
             return false;
         }
         final Student other = (Student) obj;
-        if (!Objects.equals(this.subjects, other.subjects)) {
-            return false;
-        }
-        if (!Objects.equals(this.materials, other.materials)) {
-            return false;
-        }
-        if (!Objects.equals(this.tests, other.tests)) {
-            return false;
-        }
+        
         return true;
     }
 

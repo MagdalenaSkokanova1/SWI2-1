@@ -21,6 +21,7 @@ import java.util.Set;
  *
  * @author pompi20
  */
+@Entity
 public class Subject {
     
     private String description;
